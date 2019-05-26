@@ -15,7 +15,7 @@ Subscriber Nodes
  -sonar_sub
  -step_dht11
 
-Launch Fýles
+Launch Files
 (>subs>launch)
  -led_dht11.launch
  -led_ldr.launch
@@ -23,7 +23,7 @@ Launch Fýles
  -sonar_sub.launch
  -step_dht11.launch
 
-*Written for Graduation Project
+*Created for Graduation Project
 
 *Team members
 -Burak Can Fazla
