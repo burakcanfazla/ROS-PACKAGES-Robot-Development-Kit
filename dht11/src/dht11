@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+
+import rospy
+import RPi.GPIO as GPIO
+import dht11_lib
+import time
+import datetime
+import signal
+import sys
+from std_msgs.msg import Float32
+
+# initialize GPIO
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.cleanup()
+
+print ('-----------------------------------------------------------------dht11 start')
+
+# read data using pin 14
+instance = dht11_lib.DHT11(pin=14)
+
+def signal_handler(signal, frame): # ctrl + c -> exit program
+        print('You pressed Ctrl+C!')
+        sys.exit(0)
+signal.signal(signal.SIGINT, signal_handler)
+
+
+from std_msgs.msg import String
+
+rospy.init_node('dht11')
+
+temp_publisher = rospy.Publisher('dht11_temp',Float32,queue_size=1)#definition publishing temperature value
+hum_publisher = rospy.Publisher('dht11_hum',Float32,queue_size=1)#definition publishing humidity value
+
+rate = rospy.Rate(0.3)
+
+while not rospy.is_shutdown():
+	result = instance.read()#reading dht11 datas
+	temp_publisher.publish(result.temperature)#publish temperature value
+	hum_publisher.publish(result.humidity)#publishing humidity data
+	rate.sleep()

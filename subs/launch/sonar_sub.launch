@@ -1,0 +1,6 @@
+<launch>
+	
+	<node name = "sonar" pkg = "sonar" type = "sonar"/>
+	<node name = "sonar_sub" pkg = "subs" type = "sonar_sub" output = "screen"/>
+
+</launch>

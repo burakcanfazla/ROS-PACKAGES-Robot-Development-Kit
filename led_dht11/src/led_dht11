@@ -1,0 +1,40 @@
+#!/usr/bin/env python
+import RPi.GPIO as gpio
+import time
+import sys
+import signal
+import rospy
+from std_msgs.msg import Float32
+
+
+
+
+def subscriber():
+	sub=rospy.Subscriber('/dht11_temp',Float32,callback_function)
+
+	rospy.spin()
+
+gpio.setmode(gpio.BCM)
+led1 = 2 
+led2 = 4
+gpio.setwarnings(False)
+gpio.setup(led1, gpio.OUT)
+gpio.setup(led2, gpio.OUT)
+
+
+def callback_function(message):
+	rospy.loginfo("Temperature : %d"%message.data)
+	if message.data < 18 :
+		gpio.output(led1, True)
+		gpio.output(led2, False)	
+	elif message.data >= 18 :
+		gpio.output(led1, False)
+		gpio.output(led2, True)
+		
+if __name__ == "__main__":
+	rospy.init_node("subs")
+	subscriber()
+
+gpio.output(led1, False)
+gpio.output(led2, False)
+

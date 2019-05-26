@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+
+import RPi.GPIO as GPIO
+import time
+import sys
+import signal
+import rospy
+from std_msgs.msg import Float32
+
+def signal_handler(signal, frame): # ctrl + c -> exit program
+        print('You pressed Ctrl+C!')
+        sys.exit(0)
+signal.signal(signal.SIGINT, signal_handler)
+
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+
+rospy.init_node('LDR')
+
+LDR_publisher = rospy.Publisher
+LDR_publisher = rospy.Publisher('LDR_data',Float32,queue_size=1)#definition publishing temperature value
+
+#read data using pin14
+ldr_pin = 3
+
+def RCtime (RCpin):
+ reading = 0
+ GPIO.setup(RCpin, GPIO.OUT)
+ GPIO.output(RCpin, GPIO.LOW)
+ time.sleep(.1)
+ 
+ GPIO.setup(RCpin, GPIO.IN)
+ while (GPIO.input(RCpin) == GPIO.LOW):
+ 	reading += 1
+ return reading
+ 
+while True: 
+ LDRReading = RCtime(3)
+ print LDRReading
+ LDR_publisher.publish(LDRReading)
+ time.sleep(1)
+
+GPIO.cleanup()
+
+rospy.init_node('LDR')
+LDR_publisher = rospy.Publisher
+LDR_publisher = rospy.Publisher('LDR_data',Float32,queue_size=1)
+
+
+while not rospy.is_shutdown():
+	GPIO.cleanup()
+	

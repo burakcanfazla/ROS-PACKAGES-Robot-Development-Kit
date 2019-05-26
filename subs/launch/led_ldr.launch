@@ -1,0 +1,6 @@
+<launch>
+	
+	<node name = "ldr" pkg = "ldr" type = "ldr"/>
+	<node name = "led_ldr" pkg = "led_ldr" type = "led_ldr" output = "screen"/>
+
+</launch>

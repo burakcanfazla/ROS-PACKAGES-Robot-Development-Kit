@@ -1,0 +1,6 @@
+<launch>
+	
+	<node name = "dht11" pkg = "dht11" type = "dht11"/>
+	<node name = "step_dht11" pkg = "step_dht11" type = "step_dht11" output = "screen"/>
+
+</launch>
