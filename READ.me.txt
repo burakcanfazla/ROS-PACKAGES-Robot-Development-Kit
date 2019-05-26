@@ -15,11 +15,19 @@ Subscriber Nodes
  -sonar_sub
  -step_dht11
 
-Launch F�les
+Launch Fýles
 (>subs>launch)
  -led_dht11.launch
  -led_ldr.launch
  -servo_sonar.launch
  -sonar_sub.launch
  -step_dht11.launch
- -
+
+*Written for Graduation Project
+
+*Team members
+-Burak Can Fazla
+-Süleyman Gökberk Dağlı
+-Zeki Aynal
+-Mutlu Yıldız
+
